@@ -1,4 +1,6 @@
 import nltk
+
+from functions.preprocessing import remove_accents
 nltk.download('averaged_perceptron_tagger')
 
 # Extract context features (±window_size words) around the ambiguous word
