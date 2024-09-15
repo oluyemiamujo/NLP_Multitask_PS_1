@@ -1,5 +1,3 @@
-# utils/feature_extraction.py
-
 def extract_context_window(instance, window_size=10):
     """
     Extract the context words from left and right context within the specified window size.

@@ -1,5 +1,3 @@
-# utils/log_likelihood.py
-
 import math
 from collections import defaultdict
 
