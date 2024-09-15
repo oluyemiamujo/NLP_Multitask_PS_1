@@ -14,7 +14,6 @@ def count_feature_frequencies(feature_data, sense_label1, sense_label2):
     total_sense1 = 0  # Total count for sense_label1
     total_sense2 = 0  # Total count for sense_label2
     
-    # Debugging: Add print statements
     print(f"Counting features for sense: {sense_label1} and {sense_label2}")
     
     for instance in feature_data:
