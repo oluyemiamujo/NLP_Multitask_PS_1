@@ -1,14 +1,16 @@
+# utils/feature_extraction.py
+
 def extract_context_window(instance, window_size=10):
     """
     Extract the context words from left and right context within the specified window size.
     :param instance: A dictionary containing 'left_context', 'target', 'right_context'.
     :param window_size: Number of words to consider from both sides of the target word.
-    :return: Tuple of words in the context window.
+    :return: List of words in the context window.
     """
     left_context = instance['left_context'][-window_size:]  # Get the last `window_size` words from the left context
     right_context = instance['right_context'][:window_size]  # Get the first `window_size` words from the right context
     context_window = left_context + right_context
-    return tuple(context_window)  
+    return tuple(context_window)
 
 
 def extract_position_based_features(instance):
@@ -54,10 +56,10 @@ def extract_bag_of_words(instance):
     """
     Create a bag-of-words feature from the context window.
     :param instance: A dictionary containing 'left_context', 'target', 'right_context'.
-    :return: Dictionary with a single feature 'bag_of_words' containing a tuple of context words.
+    :return: Dictionary with a single feature 'bag_of_words' containing a set of context words.
     """
     context_window = extract_context_window(instance)
-    return {'bag_of_words': tuple(sorted(context_window))}  # Convert set to sorted tuple
+    return {'bag_of_words': set(context_window)}
 
 
 def extract_all_features(instance):
