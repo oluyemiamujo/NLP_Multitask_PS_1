@@ -39,7 +39,7 @@ def extract_word_pairs(instance):
     Extract word pairs from the left and right context.
     Example: Pair (-1, +1), (-2, -1), etc.
     :param instance: A dictionary containing 'left_context', 'target', 'right_context'.
-    :return: Dictionary of word pair features.
+    :return: Dictionary of word pair features as tuples.
     """
     features = {}
     if len(instance['left_context']) >= 2:
@@ -49,6 +49,10 @@ def extract_word_pairs(instance):
     if len(instance['right_context']) >= 2:
         features['word_pair_+1_+2'] = (instance['right_context'][0], instance['right_context'][1])  # Pair (+1, +2)
     
+    # Convert pairs to tuples (they are already tuples by nature, but being explicit here)
+    for key, value in features.items():
+        features[key] = tuple(value)
+    
     return features
 
 
@@ -56,10 +60,10 @@ def extract_bag_of_words(instance):
     """
     Create a bag-of-words feature from the context window.
     :param instance: A dictionary containing 'left_context', 'target', 'right_context'.
-    :return: Dictionary with a single feature 'bag_of_words' containing a set of context words.
+    :return: Dictionary with a single feature 'bag_of_words' containing a tuple of context words.
     """
     context_window = extract_context_window(instance)
-    return {'bag_of_words': set(context_window)}
+    return {'bag_of_words': tuple(sorted(context_window))}  # Convert set to sorted tuple
 
 
 def extract_all_features(instance):

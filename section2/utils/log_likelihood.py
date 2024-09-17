@@ -16,6 +16,9 @@ def count_feature_frequencies(feature_data, sense_label1, sense_label2):
     total_sense1 = 0  # Total count for sense_label1
     total_sense2 = 0  # Total count for sense_label2
     
+    # Debugging: Add print statements
+    print(f"Counting features for sense: {sense_label1} and {sense_label2}")
+    
     for instance in feature_data:
         sense = instance['sense']
         features = instance  # All other keys are features
@@ -25,12 +28,14 @@ def count_feature_frequencies(feature_data, sense_label1, sense_label2):
             for feature, value in features.items():
                 if feature != 'sense':
                     freq_sense1[(feature, value)] += 1
+                    print(f"Sense: {sense_label1}, Feature: {feature}, Value: {value}, Count: {freq_sense1[(feature, value)]}")
         
         elif sense == sense_label2:
             total_sense2 += 1
             for feature, value in features.items():
                 if feature != 'sense':
                     freq_sense2[(feature, value)] += 1
+                    print(f"Sense: {sense_label2}, Feature: {feature}, Value: {value}, Count: {freq_sense2[(feature, value)]}")
     
     return freq_sense1, freq_sense2, total_sense1, total_sense2
 

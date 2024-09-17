@@ -2,6 +2,7 @@
 
 import re
 import string
+from collections import Counter
 
 def load_data(file_path):
     """
@@ -67,3 +68,15 @@ def clean_text(text):
     text = text.lower()  # Lowercase
     text = text.translate(str.maketrans('', '', string.punctuation))  # Remove punctuation
     return text
+
+# Step 1: Get the most frequent sense from the training data
+def get_most_frequent_sense(train_data):
+    """
+    Get the most frequent sense from the training data.
+    
+    :param train_data: List of dictionaries containing 'sense' key.
+    :return: The most frequent sense.
+    """
+    senses = [instance['sense'] for instance in train_data]
+    most_frequent_sense = Counter(senses).most_common(1)[0][0]
+    return most_frequent_sense

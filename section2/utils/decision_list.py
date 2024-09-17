@@ -88,4 +88,19 @@ def get_default_sense(train_data, sense_label1, sense_label2):
         return sense_label2
 
 
-
+def classify_test_instance(instance, decision_list, default_sense):
+    """
+    Classify a single test instance using the decision list.
+    
+    :param instance: A dictionary containing the test instance with its context and features.
+    :param decision_list: The decision list containing ranked features and their corresponding senses.
+    :param default_sense: The default sense to use if no feature in the decision list matches.
+    :return: The predicted sense for the instance.
+    """
+    # Iterate through the decision list and check if any feature matches the context
+    for feature, predicted_sense in decision_list:
+        if feature in instance['context']:  # Check if the feature is present in the context
+            return predicted_sense  # Return the sense associated with the first matching feature
+    
+    # If no feature matches, return the default sense
+    return default_sense
